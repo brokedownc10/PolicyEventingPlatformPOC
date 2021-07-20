@@ -18,7 +18,7 @@ def get_name():
         "policyNumber": 100,
         "policyPrice": 2000.75,
         "policyDetails": "Auto Policy with two cars"
-    }), Policy())
+    }), Policy_pb2.Policy())
 
     attributes = {
         "type": "policy",
