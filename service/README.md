@@ -62,6 +62,8 @@ curl -H "Content-Type: application/json" -X POST 'http://0.0.0.0:5000/policyupda
 
 ### Protobuf creation ######################################
 
+python3 -> 3.8
+
 Based on https://developers.google.com/protocol-buffers/docs/pythontutorial
 What I think needs to be done is:
 
