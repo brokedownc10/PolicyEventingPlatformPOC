@@ -64,7 +64,15 @@ curl -H "Content-Type: application/json" -X POST 'http://0.0.0.0:5000/policyupda
 
 Based on https://developers.google.com/protocol-buffers/docs/pythontutorial
 What I think needs to be done is:
+
+Install proto3 on Mac
+
+  brew install protobuf
+
 Break out the protobuf definition from the .py file. Put it in a file named: policy.proto
 Compile policy.proto using protoc so you are left with policy_pb2.py
+
+protoc Policy.proto -o Policy_pb3.py  
+
 In the python file, import policy_pb2
 Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb2.Policy())
