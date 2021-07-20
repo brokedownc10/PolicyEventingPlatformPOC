@@ -4,7 +4,7 @@ from google.protobuf.json_format import Parse
 import requests
 import json
 import Policy_pb3_pb2
-
+from kafka import KafkaProducer
 
 app = Flask(__name__)
 
@@ -25,7 +25,8 @@ def get_name():
     }
     event = CloudEvent(attributes, message)
     print("CloudEvent:" + event)
-
+    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    producer.send('policy update', event.string().encode())
     return jsonify(status)
 
 def main():
