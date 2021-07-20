@@ -25,8 +25,8 @@ def get_name():
     }
     event = CloudEvent(attributes, message)
     print("CloudEvent:" + event)
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
-    producer.send('policy update', event.string().encode())
+    producer = KafkaProducer(bootstrap_servers='ipofkafka:9092')
+    producer.send('policytopicname', str(event).encode())
     return jsonify(status)
 
 def main():
