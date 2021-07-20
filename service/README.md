@@ -62,7 +62,7 @@ curl -H "Content-Type: application/json" -X POST 'http://0.0.0.0:5000/policyupda
 
 ### Protobuf creation ######################################
 
-python3 -> 3.8
+python3 version -> 3.8
 
 Based on https://developers.google.com/protocol-buffers/docs/pythontutorial
 What I think needs to be done is:
@@ -79,3 +79,12 @@ from the service directory run
 
 In the python file, import policy_pb3
 Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Policy())
+
+
+## Knative integration
+
+## https://knative.dev/docs/eventing/samples/helloworld/helloworld-python/
+
+## Kafka integration
+
+## https://timber.io/blog/hello-world-in-kafka-using-python/
