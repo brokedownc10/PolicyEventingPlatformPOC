@@ -3,16 +3,11 @@ from cloudevents.http import CloudEvent, to_binary
 from google.protobuf.json_format import Parse
 import requests
 import json
+import Policy_pb2
 app = Flask(__name__)
 
 
 accounts = [{'status':"processed"}]
-
-message Policy {
-    unint32 policyNumber = 1;
-    double policyPrice = 2;
-    string policyDetails = 3;
-}
 
 @app.route("/policyupdate", methods=["POST"])
 def get_name():
