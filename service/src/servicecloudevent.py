@@ -3,32 +3,28 @@ from cloudevents.http import CloudEvent, to_binary
 from google.protobuf.json_format import Parse
 import requests
 import json
-import Policy_pb2
+import Policy_pb3_pb2
 app = Flask(__name__)
 
 
-accounts = [{'status':"processed"}]
+status = [{'status':"processed"}]
 
 @app.route("/policyupdate", methods=["POST"])
 def get_name():
     policy_json_request=request.get_json()
     print("Creating policy protobuf message")
 
-    message = Parse(json.dumps({
-        "policyNumber": 100,
-        "policyPrice": 2000.75,
-        "policyDetails": "Auto Policy with two cars"
-    }), Policy_pb2.Policy())
+    message = Parse(json.dumps(policy_json_request),
+      Policy_pb3_pb2.Policy())
 
     attributes = {
         "type": "policy",
         "source": "https://policy.lmig.com/event-producer",
     }
-    event = CloudEvent(attributes, policy_json_request)
-    print("CloudEvent:")
-    print(event)
+    event = CloudEvent(attributes, message)
+    print("CloudEvent:" + event)
 
-    return jsonify(accounts)
+    return jsonify(status)
 
 def main():
     app.run(host='0.0.0.0')
