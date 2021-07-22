@@ -4,7 +4,7 @@ from google.protobuf.json_format import Parse
 import requests
 import json
 import Policy_pb3_pb2
-from kafka import KafkaProducer
+from confluent_kafka import Producer
 
 app = Flask(__name__)
 
@@ -24,8 +24,9 @@ def get_name():
         "source": "https://policy.lmig.com/event-producer",
     }
     event = CloudEvent(attributes, message)
-    print("CloudEvent:" + event)
-    producer = KafkaProducer(bootstrap_servers='ipofkafka:9092')
+    print("CloudEvent: ")
+    print(event)
+    producer = Producer(bootstrap_servers='ipofkafka:9092')
     producer.send('policytopicname', str(event).encode())
     return jsonify(status)
 
