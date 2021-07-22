@@ -88,3 +88,10 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 ## Kafka integration
 
 ## https://timber.io/blog/hello-world-in-kafka-using-python/
+
+
+## Building Docker image
+
+##  docker build . -t <docker hub account name>/<imagename>:<version>
+
+##  docker push <docker hub account name>/<imagename>:<version>
