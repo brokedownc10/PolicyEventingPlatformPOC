@@ -9,5 +9,5 @@ metadata:
 spec:
   containers:
   - name: service-world
-    image: service
+    image: cuhlbblew/knativeservicecloudevent
     imagePullPolicy: Never
