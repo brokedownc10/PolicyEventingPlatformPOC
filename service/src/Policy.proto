@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-message Policy {
-    uint32 policyNumber = 1;
-    double policyPrice = 2;
-    string policyDetails = 3;
-}
