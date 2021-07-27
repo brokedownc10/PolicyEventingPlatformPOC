@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 RUN apt-get update; apt-get upgrade -y
 RUN apt-get install -y curl jq vim openssh-client
 RUN apt-get install -y iperf
+RUN apt-get install librdkafka-dev
 
 # set base image (host OS)
 FROM python:3.8
