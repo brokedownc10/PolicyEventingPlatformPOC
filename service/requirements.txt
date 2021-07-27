@@ -2,3 +2,4 @@ Flask==1.1.1
 requests==2.21.0
 cloudevents==1.2.0
 confluent-kafka==1.7.0
+protobuf==3.17.3
