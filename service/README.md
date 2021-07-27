@@ -95,3 +95,5 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 ##  docker build . -t <docker hub account name>/<imagename>:<version>
 
 ##  docker push <docker hub account name>/<imagename>:<version>
+
+## kubecrl apply -f ./<service.yml>

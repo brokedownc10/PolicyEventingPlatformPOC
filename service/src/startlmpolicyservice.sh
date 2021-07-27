@@ -33,7 +33,7 @@ do
   esac
 done
 
-if [ -z "$SERVER" ]
+if [ -z "$SERVICE" ]
 then
   exit_with_usage
   exit
