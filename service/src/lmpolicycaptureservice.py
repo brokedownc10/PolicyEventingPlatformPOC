@@ -19,6 +19,8 @@ from confluent_kafka import SerializingProducer
 from confluent_kafka.serialization import StringSerializer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.protobuf import ProtobufSerializer
+import argparse
+
 
 app = Flask(__name__)
 status = [{'status':"processed"}]
@@ -26,11 +28,7 @@ status = [{'status':"processed"}]
 @app.route("/policyupdate", methods=["POST"])
 def get_name():
 
-
-
-policy = event.data.read();
-
-# create a CloudEvent
+    # create a CloudEvent
     event = from_http(
         request.headers,
         request.get_data(),
@@ -57,25 +55,32 @@ policy = event.data.read();
 
     topic = 'pb-test'  #input arg
     #schema_registry_conf = {'url': args.schema_registry}
-    schema_registry_conf = {'url': 'http://localhost:8081'} #input arg
+    schema_registry_conf = {'url': args.reg} #input arg
     schema_registry_client = SchemaRegistryClient(schema_registry_conf)
     protobuf_serializer = ProtobufSerializer(policy_pb2.Policy,
                                              schema_registry_client)
 
     #input arg bootstrap.servers
-    producer_conf = {'bootstrap.servers': 'localhost:9092',
+    producer_conf = {'bootstrap.servers': args.broker,
                      'key.serializer': StringSerializer('utf_8'),
                      'value.serializer': protobuf_serializer}
 
     producer = SerializingProducer(producer_conf)
-    producer.produce(topic=topic, key=str(uuid4()), value=ds)
+    producer.produce(topic=args.topic, key=str(uuid4()), value=ds)
     producer.flush()
 
     return jsonify(status)
 
 def main():
+    global args
+    parser=argparse.ArgumentParser()
+    parser.add_argument("topic", help="'TOPIC'")
+    parser.add_argument("reg", help="'reg'")
+    parser.add_argument("broker", help="'broker'")
+    args = parser.parse_args()
     #app.run(host='0.0.0.0', port=8000)
     app.run(port=8080)
 
 if __name__ == "__main__":
+
     main()

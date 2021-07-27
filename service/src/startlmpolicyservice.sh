@@ -9,7 +9,7 @@ exit_with_usage()
    echo "--"
    echo "Usage: ./startlmpolicyservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081'"
    echo "--"
-   echo "Usage: ./startlmpolicycaptureservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081' -t my-topic"
+   echo "Usage: ./startlmpolicycaptureservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -b 'PLAINTEXT://kafka.confluent.svc.cluster.local:9071' -t my-topic -r 'http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081'"
    exit 1
 }
 
@@ -17,7 +17,7 @@ exit_with_usage()
 ## Process parameters
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-optstring="s:h:p:u:t:"
+optstring="s:h:p:u:t:b:"
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $opt, any option arguments are stored in OPTARG
@@ -28,6 +28,8 @@ do
     h) HOST=$OPTARG ;;
     p) PORT=$OPTARG ;;
     u) URL=$OPTARG ;;
+    b) BROKER=$OPTARG ;;
+    r) REG=$OPTARG ;;
     t) TOPIC=$OPTARG ;;
    \?) exit_with_usage ;;
   esac
@@ -37,6 +39,8 @@ echo "$SERVICE"
 echo "$HOST"
 echo "$PORT"
 echo "$URL"
+echo "$BROKER"
+echo "$REG"
 echo "$TOPIC"
 
 #if [ -z "$SERVICE" ]
@@ -66,5 +70,5 @@ echo "$TOPIC"
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
    python ./lmpolicyformsource.py $HOST:$PORT:$URL
 else
-   python ./lmpolicycaptureservice.py $HOST:$PORT:$URL:$TOPIC
+   python ./lmpolicycaptureservice.py $HOST:$PORT:$TOPIC:$REG:$BROKER
 fi

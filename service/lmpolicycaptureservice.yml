@@ -4,16 +4,16 @@ apiVersion: v1
 kind: Pod
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
 metadata:
-  name: lmpolicyformsource
+  name: lmpolicycaptureservice
 # spec - What state you desire for the object
 spec:
   containers:
-  - name: lmpolicyformsource
+  - name: lmpolicycaptureservice
     image: cuhlbblew/lmpolicyformsource:1.3
     imagePullPolicy: IfNotPresent
     command: [ "/app/startlmpolicyservice.sh"]
     #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
-    args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(URL)"]
+    args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
     env:
     - name:  SERVICE
       value: "lmpolicyformsource"
@@ -21,5 +21,9 @@ spec:
       value: "127.0.0.1"
     - name:  PORT
       value: "8080"
-    - name:  URL
-      value: "http://127.0.0.1:8081"
+    - name:  BROKER
+      value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
+    - name:  TOPIC
+      value: "policy-protobuf"
+    - name:  REG
+      value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
