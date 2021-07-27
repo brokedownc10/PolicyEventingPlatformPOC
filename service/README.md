@@ -96,4 +96,10 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 
 ##  docker push <docker hub account name>/<imagename>:<version>
 
+## Google Cloud Platform
+
+## gcloud init
+## gcloud auth login
+## gcloud container clusters get-credentials <cluster>
+
 ## kubecrl apply -f ./<service.yml>
