@@ -6,6 +6,7 @@
 exit_with_usage()
 {
    echo "Usage: startlmpolicyservice.sh -s <SERVICE> -h <HOST> -p <PORT> -u <URL> -t <TOPIC>"
+   echo "--"
    echo "Usage: ./startlmpolicyservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081'"
    echo "--"
    echo "Usage: ./startlmpolicycaptureservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081' -t my-topic"
