@@ -65,5 +65,5 @@ echo "$URL"
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
    python ./lmpolicyformsource.py $HOST:$PORT:$URL
 else
-   python ./lmpolicycaptureservice.py $ENV_HOST:$ENV_PORT:$URL:$TOPIC
+   python ./lmpolicycaptureservice.py $HOST:$PORT:$URL:$TOPIC
 fi
