@@ -26,6 +26,24 @@ status = [{'status':"processed"}]
 @app.route("/policyupdate", methods=["POST"])
 def get_name():
 
+
+
+policy = event.data.read();
+
+# create a CloudEvent
+    event = from_http(
+        request.headers,
+        request.get_data(),
+        data_unmarshaller=lambda x: io.BytesIO(x),
+    )
+
+    policy = event.data.read();
+
+    ds = policy_pb2.Policy();
+    ds.ParseFromString(policy);
+    print("Dserializing")
+    print(ds);
+
     # create a CloudEvent
     event = from_http(
         request.headers,
@@ -57,7 +75,7 @@ def get_name():
 
 def main():
     #app.run(host='0.0.0.0', port=8000)
-    app.run(port=8000)
+    app.run(port=8080)
 
 if __name__ == "__main__":
     main()
