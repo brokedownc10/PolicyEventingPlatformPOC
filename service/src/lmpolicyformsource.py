@@ -1,4 +1,3 @@
-import io
 import sys
 import requests
 import json
@@ -19,10 +18,11 @@ def send_binary_cloud_event(url: str):
     my_policy.policyPrice   = 2000;
     my_policy.policyDetails = "Auto and Home Insurance";
     pb_data = my_policy.SerializeToString()
-
     event = CloudEvent(attributes, pb_data)
+
     # Create cloudevent HTTP headers and content
     headers, body = to_binary(event)
+
     # Send cloudevent
     requests.post(url, headers=headers, data=body)
     print(f"Sent {event['id']} of type {event['type']}")
