@@ -13,7 +13,7 @@ spec:
     imagePullPolicy: IfNotPresent
     command: [ "/app/startlmpolicyservice.sh"]
     #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
-    args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(URL)"]
+    args: ["$(SERVICE)", "$(URL)"]
     env:
     - name:  SERVICE
       value: "lmpolicyformsource"

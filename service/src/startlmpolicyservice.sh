@@ -68,7 +68,7 @@ echo "$TOPIC"
 #fi
 
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
-   python3 ./lmpolicyformsource.py $HOST $PORT $URL
+   python ./lmpolicyformsource.py $URL
 else
-   python3 ./lmpolicycaptureservice.py $TOPIC $REG $BROKER
+   python ./lmpolicycaptureservice.py $TOPIC $REG $BROKER
 fi
