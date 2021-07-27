@@ -33,6 +33,12 @@ do
   esac
 done
 
+echo "$SERVICE"
+echo "$HOST"
+echo "$PORT"
+echo "$URL"
+echo "$TOPIC"
+
 if [ -z "$SERVICE" ]
 then
   exit_with_usage
@@ -56,11 +62,6 @@ then
   exit_with_usage
   exit
 fi
-
-echo "$SERVICE"
-echo "$HOST"
-echo "$PORT"
-echo "$URL"
 
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
    python ./lmpolicyformsource.py $HOST:$PORT:$URL
