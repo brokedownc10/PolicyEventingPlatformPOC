@@ -17,7 +17,7 @@ exit_with_usage()
 ## Process parameters
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-optstring="s:h:p:u:t:b:"
+optstring="s:h:p:u:t:b:r:"
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $opt, any option arguments are stored in OPTARG
@@ -68,7 +68,7 @@ echo "$TOPIC"
 #fi
 
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
-   python ./lmpolicyformsource.py $HOST $PORT $URL
+   python3 ./lmpolicyformsource.py $HOST $PORT $URL
 else
-   python ./lmpolicycaptureservice.py $HOST $PORT $TOPIC $REG $BROKER
+   python3 ./lmpolicycaptureservice.py $TOPIC $REG $BROKER
 fi
