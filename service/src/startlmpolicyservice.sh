@@ -6,7 +6,9 @@
 exit_with_usage()
 {
    echo "Usage: startlmpolicyservice.sh -s <SERVICE> -h <HOST> -p <PORT> -u <URL> -t <TOPIC>"
-   echo "Usage: ./startlmpolicyservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081' -t my-topic"
+   echo "Usage: ./startlmpolicyservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081'"
+   echo "--"
+   echo "Usage: ./startlmpolicycaptureservice.sh -s lmpolicyformsource -h 127.0.0.1 -p 8080 -u 'http://127.0.0.1:8081' -t my-topic"
    exit 1
 }
 
@@ -14,7 +16,7 @@ exit_with_usage()
 ## Process parameters
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-optstring="s:h:p:u:"
+optstring="s:h:p:u:t:"
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $opt, any option arguments are stored in OPTARG
