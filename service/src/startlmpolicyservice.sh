@@ -39,29 +39,29 @@ echo "$PORT"
 echo "$URL"
 echo "$TOPIC"
 
-if [ -z "$SERVICE" ]
-then
-  exit_with_usage
-  exit
-fi
+#if [ -z "$SERVICE" ]
+#then
+#  exit_with_usage
+#  exit
+#fi
 
-if [ -z "$HOST" ]
-then
-  exit_with_usage
-  exit
-fi
+#if [ -z "$HOST" ]
+#then
+#  exit_with_usage
+#  exit
+#fi
 
-if [ -z "$PORT" ]
-then
-  exit_with_usage
-  exit
-fi
+#if [ -z "$PORT" ]
+#then
+#  exit_with_usage
+#  exit
+#fi
 
-if [ -z "$URL" ]
-then
-  exit_with_usage
-  exit
-fi
+#if [ -z "$URL" ]
+#then
+#  exit_with_usage
+#  exit
+#fi
 
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
    python ./lmpolicyformsource.py $HOST:$PORT:$URL
