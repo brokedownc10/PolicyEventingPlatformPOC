@@ -31,7 +31,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lmpolicycaptureservice
+  name: lmpolicycaptureserviceexposeservice
 spec:
   type: ClusterIP ### may be ommited as it is a default type
   selector:
@@ -54,6 +54,3 @@ spec:
           serviceName: lmpolicycaptureservice
           servicePort: 8081
         path: /policyupdate
-  tls:
-  - hosts:
-    - lmpolicycaptureservice
