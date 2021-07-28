@@ -38,16 +38,16 @@ spec:
     targetPort: 8000 ### port your angular app listens on
     port: 8000 ### port on which you want to expose it within your cluster
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: lmpolicyformsource-ingress
-spec:
-  rules:
-  - host: lmpolicyformsource
-    http:
-      paths:
-      - backend:
-          serviceName: lmpolicyformsource-service
-          servicePort: 8000
-        path: /policyupdate
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: lmpolicyformsource-ingress
+#spec:
+#  rules:
+#  - host: lmpolicyformsource
+#    http:
+#      paths:
+#      - backend:
+#          serviceName: lmpolicyformsource-service
+#          servicePort: 8000
+#        path: /policyupdate
