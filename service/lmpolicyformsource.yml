@@ -22,7 +22,7 @@ spec:
     - name:  PORT
       value: "8080"
     - name:  URL
-      value: "http://.default.svc.cluster.local:8081"
+      value: "http://lmpolicycaptureservice.default.svc.cluster.local:8081"
 ---
 apiVersion: v1
 kind: Service
@@ -36,3 +36,20 @@ spec:
   - protocol: TCP
     targetPort: 8000 ### port your angular app listens on
     port: 8000 ### port on which you want to expose it within your cluster
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: lmpolicyformsource-ingress
+spec:
+  rules:
+  - host: lmpolicyformsource
+    http:
+      paths:
+      - backend:
+          serviceName: lmpolicyformsource
+          servicePort: 8000
+        path: /
+  tls:
+  - hosts:
+    - lmpolicyformsource
