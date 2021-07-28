@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: lmpolicyformsource
-    image: cuhlbblew/lmpolicyformsource:1.7
+    image: cuhlbblew/lmpolicyformsource:1.8
     imagePullPolicy: IfNotPresent
     command: [ "/app/startlmpolicyservice.sh"]
     #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
