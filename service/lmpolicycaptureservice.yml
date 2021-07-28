@@ -27,3 +27,16 @@ spec:
       value: "policy-protobuf"
     - name:  REG
       value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lmpolicycaptureservice
+spec:
+  type: ClusterIP ### may be ommited as it is a default type
+  selector:
+    name: lmpolicycaptureservice ### should match your labels defined for your backend pods
+  ports:
+  - protocol: TCP
+    targetPort: 8080 ### port your backend app listens on
+    port: 8081 ### port on which you want to expose it within your cluster
