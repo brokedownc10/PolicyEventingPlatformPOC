@@ -19,4 +19,4 @@ EXPOSE 8080
 
 ENTRYPOINT [ "python" ]
 
-CMD [ "./lmpolicyformsource.py" ]
+#CMD [ "startlmpolicyservice.py" ]
