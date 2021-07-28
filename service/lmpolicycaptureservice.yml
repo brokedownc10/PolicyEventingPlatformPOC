@@ -4,11 +4,11 @@ apiVersion: v1
 kind: Pod
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
 metadata:
-  name: lmpolicycaptureservice
+  name: lmpolicycapture
 # spec - What state you desire for the object
 spec:
   containers:
-  - name: lmpolicycaptureservice
+  - name: lmpolicycapture
     image: cuhlbblew/lmpolicyformsource:1.9
     imagePullPolicy: IfNotPresent
     command: [ "/app/startlmpolicyservice.sh"]
@@ -16,7 +16,7 @@ spec:
     args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
     env:
     - name:  SERVICE
-      value: "lmpolicycaptureservice"
+      value: "lmpolicycapture"
     - name:  HOST
       value: "127.0.0.1"
     - name:  PORT
@@ -31,13 +31,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lmpolicycaptureserviceexposeservice
+  name: lmpolicycapture-service
 spec:
   type: ClusterIP ### may be ommited as it is a default type
   selector:
-    name: lmpolicycaptureservice ### should match your labels defined for your backend pods
+    name: lmpolicycapture ### should match your labels defined for your backend pods
   ports:
-  - protocol: TCP
+  - name: main
+    protocol: TCP
     targetPort: 8000 ### port your backend app listens on
     port: 8081 ### port on which you want to expose it within your cluster
 ---
@@ -47,10 +48,10 @@ metadata:
   name: lmpolicycaptureservice-ingress
 spec:
   rules:
-  - host: lmpolicycaptureservice
+  - host: lmpolicycapture
     http:
       paths:
       - backend:
-          serviceName: lmpolicycaptureservice
+          serviceName: lmpolicycapture-service
           servicePort: 8081
         path: /policyupdate

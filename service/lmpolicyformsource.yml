@@ -27,13 +27,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: lmpolicyformsourceservice
+  name: lmpolicyformsource-service
 spec:
   type: ClusterIP ### may be ommited as it is a default type
   selector:
     name: lmpolicyformsource ### should match your labels defined for your pods
   ports:
-  - protocol: TCP
+  - name: main
+    protocol: TCP
     targetPort: 8000 ### port your angular app listens on
     port: 8000 ### port on which you want to expose it within your cluster
 ---
@@ -47,9 +48,6 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: lmpolicyformsource
+          serviceName: lmpolicyformsource-service
           servicePort: 8000
         path: /policyupdate
-  tls:
-  - hosts:
-    - lmpolicyformsource
