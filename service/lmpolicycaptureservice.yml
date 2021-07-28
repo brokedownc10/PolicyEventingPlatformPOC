@@ -53,7 +53,7 @@ spec:
       - backend:
           serviceName: lmpolicycaptureservice
           servicePort: 8081
-        path: /
+        path: /policyupdate
   tls:
   - hosts:
     - lmpolicycaptureservice
