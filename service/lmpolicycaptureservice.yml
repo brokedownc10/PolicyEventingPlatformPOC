@@ -42,16 +42,16 @@ spec:
     targetPort: 8000 ### port your backend app listens on
     port: 8081 ### port on which you want to expose it within your cluster
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: lmpolicycaptureservice-ingress
-spec:
-  rules:
-  - host: lmpolicycapture
-    http:
-      paths:
-      - backend:
-          serviceName: lmpolicycapture-service
-          servicePort: 8081
-        path: /policyupdate
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: lmpolicycaptureservice-ingress
+#spec:
+#  rules:
+#  - host: lmpolicycapture
+#    http:
+#      paths:
+#      - backend:
+#          serviceName: lmpolicycapture-service
+#          servicePort: 8081
+#        path: /policyupdate

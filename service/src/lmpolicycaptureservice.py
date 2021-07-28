@@ -2,7 +2,7 @@
 
 # Processes a POST json request and sends an http CloudEvent to Kafka
 #
-# ex: curl -XPOST -H "Content-Type: application/json" --data '{"policyNumber": 400, "policyPrice": 3500.75, "policyDetails": "Auto Policy with three cars"}' http://127.0.0.1:8000/policyupdate
+# ex: curl -X POST -H "Content-Type: application/json" --data '{"policyNumber": 400, "policyPrice": 3500.75, "policyDetails": "Auto Policy with three cars"}' http://127.0.0.1:8000/policyupdate
 #
 
 import io
