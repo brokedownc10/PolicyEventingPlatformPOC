@@ -22,7 +22,7 @@ spec:
     - name:  PORT
       value: "8080"
     - name:  URL
-      value: "http://lmpolicycapture-service:8081/policyupdate"
+      value: "http://lmpolicycapture-service.default:8081/policyupdate"
 ---
 apiVersion: v1
 kind: Service
