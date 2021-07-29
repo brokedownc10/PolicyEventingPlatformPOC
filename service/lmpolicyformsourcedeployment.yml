@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: lmpolicyformsource
-        image: cuhlbblew/lmpolicyformsource:1.13
+        image: cuhlbblew/lmpolicyformsource:1.14
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000

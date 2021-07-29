@@ -1,20 +1,14 @@
 #  apiVersion - Which version of the Kubernetes API you're using to create this object
-apiVersion: apps/v1
+apiVersion: serving.knative.dev/v1
 #  kind - What kind of object you want to create
-kind: Deployment
+kind: Service
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
 metadata:
-  name: lmpolicycapture-deployment
+  name: lmpolicycapture-knative
   labels:
     app: lmpolicycapture
 # spec - What state you desire for the object
 spec:
-  progressDeadlineSeconds: 600
-  replicas: 1
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: lmpolicycapture
   template:
     metadata:
       labels:
@@ -22,22 +16,12 @@ spec:
     spec:
       containers:
       - name: lmpolicycapture
-        image: cuhlbblew/lmpolicyformsource:1.13
+        image: cuhlbblew/lmpolicyformsource:1.14
         imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
-          name: main
-          protocol: TCP
         command: [ "/app/startlmpolicyservice.sh"]
         #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
         args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
         env:
-        - name:  SERVICE
-          value: "lmpolicycapture"
-        - name:  HOST
-          value: "127.0.0.1"
-        - name:  PORT
-          value: "8080"
         - name:  BROKER
           value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
         - name:  TOPIC
@@ -50,25 +34,11 @@ kind: Service
 metadata:
   name: lmpolicycapture-service
 spec:
-  type: ClusterIP ### may be ommited as it is a default type
+  type: LoadBalancer ### may be ommited as it is a default type
   selector:
     app: lmpolicycapture ### should match your labels defined for your backend pods
   ports:
   - name: main
     protocol: TCP
-    targetPort: 8080 ### port your backend app listens on
+    targetPort: 80 ### port your backend app listens on
     port: 8081 ### port on which you want to expose it within your cluster
----
-#apiVersion: extensions/v1beta1
-#kind: Ingress
-#metadata:
-#  name: lmpolicycaptureservice-ingress
-#spec:
-#  rules:
-#  - host: lmpolicycapture
-#    http:
-#      paths:
-#      - backend:
-#          serviceName: lmpolicycapture-service
-#          servicePort: 8081
-#        path: /policyupdate
