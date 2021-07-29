@@ -31,7 +31,7 @@ metadata:
 spec:
   type: ClusterIP ### may be ommited as it is a default type
   selector:
-    name: lmpolicyformsource ### should match your labels defined for your pods
+    app: lmpolicyformsource ### should match your labels defined for your pods
   ports:
   - name: main
     protocol: TCP
