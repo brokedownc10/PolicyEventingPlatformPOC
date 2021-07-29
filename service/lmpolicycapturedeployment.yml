@@ -1,5 +1,5 @@
 #  apiVersion - Which version of the Kubernetes API you're using to create this object
-apiVersion: v1
+apiVersion: extensions/v1beta1
 #  kind - What kind of object you want to create
 kind: Deployment
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
