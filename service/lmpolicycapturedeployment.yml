@@ -15,26 +15,26 @@ spec:
       app: lmpolicyformsource
   template:
     spec:
-    containers:
-    - name: lmpolicycapture
-      image: cuhlbblew/lmpolicyformsource:1.11
-      imagePullPolicy: IfNotPresent
-      command: [ "/app/startlmpolicyservice.sh"]
-      #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
-      args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
-      env:
-      - name:  SERVICE
-        value: "lmpolicycapture"
-      - name:  HOST
-        value: "127.0.0.1"
-      - name:  PORT
-        value: "8080"
-      - name:  BROKER
-        value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
-      - name:  TOPIC
-        value: "policy-protobuf"
-      - name:  REG
-        value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
+      containers:
+      - name: lmpolicycapture
+        image: cuhlbblew/lmpolicyformsource:1.11
+        imagePullPolicy: IfNotPresent
+        command: [ "/app/startlmpolicyservice.sh"]
+        #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
+        args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
+        env:
+        - name:  SERVICE
+          value: "lmpolicycapture"
+        - name:  HOST
+          value: "127.0.0.1"
+        - name:  PORT
+          value: "8080"
+        - name:  BROKER
+          value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
+        - name:  TOPIC
+          value: "policy-protobuf"
+        - name:  REG
+          value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
 ---
 apiVersion: v1
 kind: Service
