@@ -13,7 +13,7 @@ spec:
       containerConcurrency: 1
       containers:
         - image: cuhlbblew/lmpolicycapture-knative:1.1
-          command: [ "python /app/lmpolicycaptureknative.py policy-protobuf "]
+          command: [ "python /app/lmpolicycaptureknative.py"]
           args: ["$(TOPIC)", "$(REG)", "$(BROKER)"]
           env:
           - name: TARGET
