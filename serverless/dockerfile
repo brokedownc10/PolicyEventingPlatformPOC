@@ -1,11 +1,7 @@
-FROM ubuntu:18.04
-RUN apt-get update; apt-get upgrade -y
-RUN apt-get install -y curl jq vim openssh-client
-RUN apt-get install -y iperf
-RUN apt-get install librdkafka-dev
 
-# set base image (host OS)
-FROM python:3.8
+# Use the official lightweight Python image.
+# https://hub.docker.com/_/python
+FROM python:3.7-slim
 
 COPY /src /app
 
@@ -18,5 +14,3 @@ RUN pip install -r requirements.txt
 EXPOSE 8080
 
 ENTRYPOINT [ "python" ]
-
-#CMD [ "startlmpolicyservice.py" ]

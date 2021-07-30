@@ -13,7 +13,7 @@ spec:
       containerConcurrency: 1
       containers:
         - image: cuhlbblew/lmpolicyformsource:1.16
-          command: [ "/app/startlmpolicyservice.sh"]
+          command: [ "python /app/startlmpolicyservice.sh"]
           #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
           args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
           env:
