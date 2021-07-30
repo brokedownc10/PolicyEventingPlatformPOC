@@ -110,3 +110,9 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 ## kubectl get pods
 ## kubectl get svc
 ## kubectl get ingress
+
+## kubectl exec -it <pod> /bin/bash
+
+## log into pod
+## ss -lnp | grep "port"
+## ss -- socket stats
