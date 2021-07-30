@@ -12,10 +12,9 @@ spec:
     spec:
       containerConcurrency: 1
       containers:
-        - image: cuhlbblew/lmpolicyformsource:1.16
-          command: [ "python /app/startlmpolicyservice.sh"]
-          #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
-          args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
+        - image: cuhlbblew/lmpolicycapture-knative:1.1
+          command: [ "python /app/lmpolicycaptureknative.py policy-protobuf "]
+          args: ["$(TOPIC)", "$(REG)", "$(BROKER)"]
           env:
           - name: TARGET
             value: "lmpolicycapture-target"

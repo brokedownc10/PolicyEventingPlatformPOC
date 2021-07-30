@@ -72,7 +72,7 @@ def get_name():
 def main():
     global args
     parser=argparse.ArgumentParser()
-    parser.add_argument("topic", help="'TOPIC'")
+    parser.add_argument("topic", help="'topic'")
     parser.add_argument("reg", help="'reg'")
     parser.add_argument("broker", help="'broker'")
     args = parser.parse_args()
