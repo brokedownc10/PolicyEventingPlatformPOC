@@ -1,77 +1,37 @@
-# Namespace for sample application with eventing enabled
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: knative-samples
-  labels:
-       eventing.knative.dev/injection: enabled
----
-# A default broker
-apiVersion: eventing.knative.dev/v1
-kind: Broker
-metadata:
-  name: default
-  namespace: knative-samples
-  annotations:
-    # Note: you can set the eventing.knative.dev/broker.class annotation to change the class of the broker.
-    # The default broker class is MTChannelBasedBroker, but Knative also supports use of the other class.
-    eventing.knative.dev/broker.class: MTChannelBasedBroker
-spec: {}
----
 #  apiVersion - Which version of the Kubernetes API you're using to create this object
-apiVersion: apps/v1
+apiVersion: serving.knative.dev/v1
 #  kind - What kind of object you want to create
-kind: Deployment
+kind: Service
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
 metadata:
-  name: lmpolicycapture-deployment
-  namespace: knative-samples
-  labels:
-    app: lmpolicycapture
+  name: lmpolicycapture-knative
+  namespace: default
 # spec - What state you desire for the object
 spec:
-  progressDeadlineSeconds: 600
-  replicas: 1
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: lmpolicycapture
   template:
-    metadata:
-      labels:
-        app: lmpolicycapture
     spec:
+      containerConcurrency: 1
       containers:
-      - name: lmpolicycapture
-        image: cuhlbblew/lmpolicyformsource:1.16
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
-          name: main
-          protocol: TCP
-        command: [ "/app/startlmpolicyservice.sh"]
-        #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
-        args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
-        env:
-        - name:  SERVICE
-          value: "lmpolicycapture"
-        - name:  HOST
-          value: "127.0.0.1"
-        - name:  PORT
-          value: "8080"
-        - name:  BROKER
-          value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
-        - name:  TOPIC
-          value: "policy-protobuf"
-        - name:  REG
-          value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
+        - image: cuhlbblew/lmpolicyformsource:1.16
+          command: [ "/app/startlmpolicyservice.sh"]
+          #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
+          args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
+          env:
+          - name: TARGET
+            value: "lmpolicycapture-target"
+          - name:  BROKER
+            value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
+          - name:  TOPIC
+            value: "policy-protobuf"
+          - name:  REG
+            value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: lmpolicycapture-service
 spec:
-  type: ClusterIP ### may be ommited as it is a default type
+  type: LoadBalancer ### may be ommited as it is a default type
   selector:
     app: lmpolicycapture ### should match your labels defined for your backend pods
   ports:
