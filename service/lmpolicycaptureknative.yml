@@ -5,29 +5,26 @@ kind: Service
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
 metadata:
   name: lmpolicycapture-knative
-  labels:
-    app: lmpolicycapture
+  namespace: default
 # spec - What state you desire for the object
 spec:
   template:
-    metadata:
-      labels:
-        app: lmpolicycapture
     spec:
+      containerConcurrency: 1
       containers:
-      - name: lmpolicycapture
-        image: cuhlbblew/lmpolicyformsource:1.14
-        imagePullPolicy: IfNotPresent
-        command: [ "/app/startlmpolicyservice.sh"]
-        #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
-        args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
-        env:
-        - name:  BROKER
-          value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
-        - name:  TOPIC
-          value: "policy-protobuf"
-        - name:  REG
-          value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
+        - image: cuhlbblew/lmpolicyformsource:1.14
+          command: [ "/app/startlmpolicyservice.sh"]
+          #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
+          args: ["$(SERVICE)", "$(HOST)", "$(PORT)", "$(BROKER)", "$(TOPIC)", "$(REG)"]
+          env:
+          - name: TARGET
+            value: "lmpolicycapture-target"
+          - name:  BROKER
+            value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
+          - name:  TOPIC
+            value: "policy-protobuf"
+          - name:  REG
+            value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
 ---
 apiVersion: v1
 kind: Service
@@ -40,5 +37,5 @@ spec:
   ports:
   - name: main
     protocol: TCP
-    targetPort: 80 ### port your backend app listens on
+    targetPort: 8080 ### port your backend app listens on
     port: 8081 ### port on which you want to expose it within your cluster

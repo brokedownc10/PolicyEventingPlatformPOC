@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: lmpolicycapture
-        image: cuhlbblew/lmpolicyformsource:1.14
+        image: cuhlbblew/lmpolicyformsource:1.15
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -56,7 +56,7 @@ spec:
   ports:
   - name: main
     protocol: TCP
-    targetPort: 80 ### port your backend app listens on
+    targetPort: 8080 ### port your backend app listens on
     port: 8081 ### port on which you want to expose it within your cluster
 ---
 #apiVersion: extensions/v1beta1
