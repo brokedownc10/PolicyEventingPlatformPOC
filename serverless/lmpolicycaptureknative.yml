@@ -12,7 +12,7 @@ spec:
     spec:
       containerConcurrency: 1
       containers:
-        - image: cuhlbblew/lmpolicycapture-knative:1.1
+        - image: cuhlbblew/lmpolicycapture-knative:1.2
           command: [ "python /app/lmpolicycaptureknative.py"]
           args: ["$(TOPIC)", "$(REG)", "$(BROKER)"]
           env:
@@ -24,17 +24,3 @@ spec:
             value: "policy-protobuf"
           - name:  REG
             value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: lmpolicycapture-service
-spec:
-  type: LoadBalancer ### may be ommited as it is a default type
-  selector:
-    app: lmpolicycapture ### should match your labels defined for your backend pods
-  ports:
-  - name: main
-    protocol: TCP
-    targetPort: 8080 ### port your backend app listens on
-    port: 8081 ### port on which you want to expose it within your cluster
