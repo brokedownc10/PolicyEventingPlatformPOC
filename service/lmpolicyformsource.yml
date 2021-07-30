@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: lmpolicyformsource
-    image: cuhlbblew/lmpolicyformsource:1.15
+    image: cuhlbblew/lmpolicyformsource:1.16
     imagePullPolicy: IfNotPresent
     command: [ "/app/startlmpolicyservice.sh"]
     #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
@@ -35,7 +35,7 @@ spec:
   ports:
   - name: main
     protocol: TCP
-    targetPort: 8000 ### port your app listens on
+    targetPort: 8080 ### port your app listens on
     port: 8000 ### port on which you want to expose it within your cluster
 ---
 #apiVersion: extensions/v1beta1
