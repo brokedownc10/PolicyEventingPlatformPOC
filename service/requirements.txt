@@ -3,3 +3,4 @@ requests==2.21.0
 cloudevents==1.2.0
 confluent-kafka==1.7.0
 protobuf==3.17.3
+ddtrace==0.50.3

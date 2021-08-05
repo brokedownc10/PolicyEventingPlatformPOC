@@ -7,6 +7,9 @@ metadata:
   name: lmpolicycapture-deployment
   labels:
     app: lmpolicycapture
+    tags.datadoghq.com/env: "snd"
+    tags.datadoghq.com/service: "lmpolicycapture"
+    tags.datadoghq.com/version: "1.17"
 # spec - What state you desire for the object
 spec:
   progressDeadlineSeconds: 600
@@ -22,11 +25,13 @@ spec:
     spec:
       containers:
       - name: lmpolicycapture
-        image: cuhlbblew/lmpolicyformsource:1.16
+        image: cuhlbblew/lmpolicyformsource:1.17
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           name: main
+          hostPort: 8080
+          name: traceport
           protocol: TCP
         command: [ "/app/startlmpolicyservice.sh"]
         #args: [ "lmpolicyformsource", "127.0.0.1", "8080", "http://127.0.0.1:8081"]
@@ -44,6 +49,25 @@ spec:
           value: "policy-protobuf"
         - name:  REG
           value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
+        - name: DD_AGENT_HOST
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: DD_ENV
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/env']
+        - name: DD_SERVICE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/service']
+        - name: DD_VERSION
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['tags.datadoghq.com/version']
+
+        - name: DD_LOGS_INJECTION
+          value: "true"
 ---
 apiVersion: v1
 kind: Service
