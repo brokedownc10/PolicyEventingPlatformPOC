@@ -70,5 +70,5 @@ echo "$TOPIC"
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
    python ./lmpolicyformsource.py $URL
 else
-   python ./lmpolicycaptureservice.py $TOPIC $REG $BROKER
+   python ./lmpolicycapture.py $TOPIC $REG $BROKER
 fi
