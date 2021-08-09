@@ -9,7 +9,7 @@ metadata:
     app: lmpolicycapture
     tags.datadoghq.com/env: "snd"
     tags.datadoghq.com/service: "lmpolicycapture"
-    tags.datadoghq.com/version: "1.18"
+    tags.datadoghq.com/version: "1.19"
 # spec - What state you desire for the object
 spec:
   progressDeadlineSeconds: 600
@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: lmpolicycapture
-        image: cuhlbblew/lmpolicyformsource:1.18
+        image: cuhlbblew/lmpolicyformsource:1.19
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
