@@ -12,7 +12,7 @@ spec:
     spec:
       containerConcurrency: 1
       containers:
-        - image: cuhlbblew/lmpolicycapture-knative:1.2
+        - image: docker.io/cuhlbblew/lmpolicycapture-knative:1.2
           command: [ "python /app/lmpolicycaptureknative.py"]
           args: ["$(TOPIC)", "$(REG)", "$(BROKER)"]
           env:

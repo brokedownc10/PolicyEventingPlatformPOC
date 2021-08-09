@@ -40,17 +40,6 @@ def get_name():
     print("Dserializing")
     print(ds);
 
-    # create a CloudEvent
-    event = from_http(
-        request.headers,
-        request.get_data(),
-        data_unmarshaller=lambda x: io.BytesIO(x),
-    )
-    ds = policy_pb2.Policy();
-    ds.ParseFromString(policy);
-    print("Dserializing")
-    print(ds);
-
     topic = 'pb-test'  #input arg
     #schema_registry_conf = {'url': args.schema_registry}
     schema_registry_conf = {'url': args.reg} #input arg
