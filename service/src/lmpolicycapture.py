@@ -38,6 +38,7 @@ def healthupdate():
 
 @app.route("/policyupdate", methods=["POST"])
 def get_name():
+    processingstatus=processedcomplete
     global health
     health="Good"
 
@@ -76,7 +77,7 @@ def get_name():
       processingstatus=processedfailed
       health="endpoint policyupdate had a backend call error to topic"
 
-    return jsonify(status)
+    return(jsonify(processingstatus) )
 
 def main():
     global args
