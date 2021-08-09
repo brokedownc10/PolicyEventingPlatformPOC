@@ -5,7 +5,6 @@ import json
 import policy_pb2;
 from cloudevents.http import CloudEvent, to_binary
 import argparse
-from enum import Enum
 
 app = Flask(__name__)
 
