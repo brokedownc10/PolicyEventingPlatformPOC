@@ -76,7 +76,7 @@ spec:
   ports:
   - name: main
     protocol: TCP
-    targetPort: 8080 ### port your angular app listens on
+    targetPort: 8000 ### port your angular app listens on
     port: 8000 ### port on which you want to expose it within your cluster
 ---
 apiVersion: extensions/v1beta1
