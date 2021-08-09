@@ -23,10 +23,23 @@ import argparse
 
 
 app = Flask(__name__)
-status = [{'status':"processed"}]
+
+processedcomplete = [{'processed':"complete"}]
+processedfailed = [{'processed':"fail"}]
+
+global health
+health = "Unknown"
+
+@app.route("/health", methods=["POST"])
+def healthupdate():
+    global health
+    healthmessage=[{'healthstatus':health}]
+    return(jsonify(healthmessage))
 
 @app.route("/policyupdate", methods=["POST"])
 def get_name():
+    global health
+    health="Good"
 
     # create a CloudEvent
     event = from_http(
@@ -55,8 +68,13 @@ def get_name():
                      'value.serializer': protobuf_serializer}
 
     producer = SerializingProducer(producer_conf)
-    producer.produce(topic=args.topic, key=str(uuid4()), value=ds)
-    producer.flush()
+    try:
+      producer.produce(topic=args.topic, key=str(uuid4()), value=ds)
+      producer.flush()
+    except:
+      print ("Error: Producer")
+      processingstatus=processedfailed
+      health="endpoint policyupdate had a backend call error to topic"
 
     return jsonify(status)
 
