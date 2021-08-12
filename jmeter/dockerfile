@@ -1,0 +1,19 @@
+#Download base image ubuntu 20.04
+FROM ubuntu:20.04
+RUN apt-get update; apt-get upgrade -y
+RUN apt-get install -y curl jq vim openssh-client
+RUN apt-get install -y iperf
+
+FROM java:8
+RUN wget http://mirror.nbtelecom.com.br/apache//jmeter/binaries/apache-jmeter-5.4.tgz
+RUN tar -xvzf apache-jmeter-5.4.tgz
+RUN rm apache-jmeter-5.4.tgz
+
+RUN mv apache-jmeter-5.4 /jmeter
+
+ENV JMETER_HOME /jmeter
+
+# Add Jmeter to the Path
+ENV PATH $JMETER_HOME/bin:$PATH
+
+COPY ./Load.jmx /jmeter/bin

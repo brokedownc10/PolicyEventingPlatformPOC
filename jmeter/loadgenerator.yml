@@ -1,0 +1,16 @@
+#  apiVersion - Which version of the Kubernetes API you're using to create this object
+apiVersion: v1
+kind: Pod
+metadata:
+  name: loadgenerator
+  #namespace: demo
+spec:
+  containers:
+  - image: cuhlbblew/loadgenerator:1.14
+    command:
+      - /bin/sh
+      - "-c"
+      - "sleep 60m"
+    imagePullPolicy: IfNotPresent
+    name: loadgenerator
+  restartPolicy: Always

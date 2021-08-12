@@ -1,0 +1,36 @@
+2021-08-12 09:24:50,058 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2021-08-12 09:24:50,099 INFO o.a.j.JMeter: Loading user properties from: user.properties
+2021-08-12 09:24:50,099 INFO o.a.j.JMeter: Loading system properties from: /Users/n0293488/repos/jmeter/apache-jmeter-5.4.1/bin/system.properties
+2021-08-12 09:24:50,109 INFO o.a.j.JMeter: Copyright (c) 1998-2021 The Apache Software Foundation
+2021-08-12 09:24:50,109 INFO o.a.j.JMeter: Version 5.4.1
+2021-08-12 09:24:50,109 INFO o.a.j.JMeter: java.version=11.0.2
+2021-08-12 09:24:50,109 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: os.name=Mac OS X
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: os.arch=x86_64
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: os.version=10.15.7
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: file.encoding=UTF-8
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: java.awt.headless=null
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: Max memory     =1073741824
+2021-08-12 09:24:50,110 INFO o.a.j.JMeter: Available Processors =8
+2021-08-12 09:24:50,124 INFO o.a.j.JMeter: Default Locale=English (EN)
+2021-08-12 09:24:50,124 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2021-08-12 09:24:50,124 INFO o.a.j.JMeter: JMeterHome=/Users/n0293488/repos/jmeter/apache-jmeter-5.4.1
+2021-08-12 09:24:50,124 INFO o.a.j.JMeter: user.dir  =/Users/n0293488/repos/knative-tutorial/example/jmeter
+2021-08-12 09:24:50,124 INFO o.a.j.JMeter: PWD       =/Users/n0293488/repos/knative-tutorial/example/jmeter
+2021-08-12 09:24:50,127 INFO o.a.j.JMeter: IP: 100.64.1.4 Name: LIBP45P-26484DD FullName: libp45p-26484dd.lm.lmig.com
+2021-08-12 09:24:50,699 INFO o.a.j.JMeter: Setting LAF to: com.github.weisj.darklaf.DarkLaf:com.github.weisj.darklaf.theme.DarculaTheme
+2021-08-12 09:24:51,691 INFO o.a.j.JMeter: Loaded icon properties from org/apache/jmeter/images/icon.properties
+2021-08-12 09:24:53,333 INFO o.a.j.JMeter: Loading file: Load.jmx
+2021-08-12 09:24:53,336 INFO o.a.j.s.FileServer: Default base='/Users/n0293488/repos/knative-tutorial/example/jmeter'
+2021-08-12 09:24:53,338 INFO o.a.j.s.FileServer: Set new base='/Users/n0293488/repos/knative-tutorial/example/jmeter'
+2021-08-12 09:24:53,558 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2021-08-12 09:24:53,581 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2021-08-12 09:24:53,584 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2021-08-12 09:24:53,585 INFO o.a.j.s.SaveService: Loading file: Load.jmx
+2021-08-12 09:24:53,613 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-08-12 09:24:53,613 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-08-12 09:24:53,613 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-08-12 09:24:53,613 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2021-08-12 09:24:53,613 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2021-08-12 09:24:53,613 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2021-08-12 09:24:53,621 INFO o.a.j.s.FileServer: Set new base='/Users/n0293488/repos/knative-tutorial/example/jmeter'
