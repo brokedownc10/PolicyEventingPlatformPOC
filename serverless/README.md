@@ -114,3 +114,8 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 ## kubectl exec -it <pod> -- /bin/bash
 
 ## kubectl get ksvc
+
+
+# research
+https://github.com/edenhill/librdkafka/blob/master/INTRODUCTION.md#ssl
+https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/_modules/confluent_kafka/serializing_producer.html
