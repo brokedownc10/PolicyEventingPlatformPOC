@@ -6,7 +6,7 @@ metadata:
   #namespace: demo
 spec:
   containers:
-  - image: cuhlbblew/loadgenerator:1.14
+  - image: cuhlbblew/loadgenerator:1.15
     command:
       - /bin/sh
       - "-c"
