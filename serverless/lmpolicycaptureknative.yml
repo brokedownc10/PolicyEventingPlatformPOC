@@ -4,7 +4,7 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 # metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
 metadata:
-  name: lmpolicycapture
+  name: lmpolicycapture-knative
   namespace: default
 # spec - What state you desire for the object
 spec:
@@ -21,17 +21,8 @@ spec:
         # Limit scaling to 100 pods.
         autoscaling.knative.dev/maxScale: "10"
     spec:
-      containerConcurrency: 1
       containers:
-        - image: docker.io/cuhlbblew/lmpolicycapture-knative:1.2
-          command: [ "python /app/lmpolicycaptureknative.py"]
-          args: ["$(TOPIC)", "$(REG)", "$(BROKER)"]
+        - image: docker.io/cuhlbblew/lmpolicycapture-knative:1.16
           env:
           - name: TARGET
-            value: "lmpolicycapture-target"
-          - name:  BROKER
-            value: "PLAINTEXT://kafka.confluent.svc.cluster.local:9071"
-          - name:  TOPIC
-            value: "policy-protobuf"
-          - name:  REG
-            value: "http://schemaregistry-0.schemaregistry.confluent.svc.cluster.local:8081"
+            value: "lmpolicycapture-knative"
