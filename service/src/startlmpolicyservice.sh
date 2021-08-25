@@ -68,7 +68,7 @@ echo "$TOPIC"
 #fi
 
 if [ "$SERVICE" == 'lmpolicyformsource' ]; then
-   python ./lmpolicyformsource.py $URL
+   ddtrace-run python ./lmpolicyformsource.py $URL
 else
-   python ./lmpolicycapture.py $TOPIC $REG $BROKER
+   ddtrace-run python ./lmpolicycapture.py $TOPIC $REG $BROKER
 fi
