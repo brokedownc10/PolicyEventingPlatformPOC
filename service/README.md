@@ -116,3 +116,5 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 ## log into pod
 ## ss -lnp | grep "port"
 ## ss -- socket stats
+
+## curl -X POST -H "Content-Type: application/json" --data '{"policyNumber": 400, "policyPrice": 3500.75, "policyDetails": "Auto Policy with three cars"}' http://lmpolicyformsource-service:8000/policyupdate

@@ -52,14 +52,6 @@ kubectl apply -f namespace.yml
 message policy  {int32 policyNumber = 1;  double policyPrice = 2;  string policyDetails = 3;}
 
 
-curl -H "Content-Type: application/json" -X POST 'http://0.0.0.0:5000/policyupdate' --data '{"policyNumber": 100, "policyPrice": 2000.75, "policyDetails": "Auto Policy with two cars"}'
-
-
-curl -H "Content-Type: application/json" -X POST 'http://0.0.0.0:5000/policyupdate' --data '{"policyNumber": 200, "policyPrice": 12000.50, "policyDetails": "Home Policy "}'
-
-curl -H "Content-Type: application/json" -X POST 'http://0.0.0.0:5000/policyupdate' --data '{"policyNumber": 300, "policyPrice": 15000.75, "policyDetails": "Home and Auto Policy with two cars"}'
-'
-
 ### Protobuf creation ######################################
 
 python3 version -> 3.8
@@ -119,3 +111,6 @@ Then you can change line 22 to: message = Parse(json.dumps({…}),policy_pb3.Pol
 # research
 https://github.com/edenhill/librdkafka/blob/master/INTRODUCTION.md#ssl
 https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/_modules/confluent_kafka/serializing_producer.html
+
+
+## curl -X POST -H "Content-Type: application/json" --data '{"policyNumber": 400, "policyPrice": 3500.75, "policyDetails": "Auto Policy with three cars"}' http://lmpolicycapture-knative.default.35.238.210.88.sslip.io/policyupdate
