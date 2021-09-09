@@ -31,15 +31,11 @@ def healthupdate():
 @app.route("/policyupdate", methods=["POST"])
 def policy_update():
     global processingstatus
-    processedincomplete = [{'processed':"incomplete"}]
-    processedcomplete = [{'processed':"complete"}]
-    processedfailed = [{'processed':"fail"}]
-    processingstatus=processedincomplete
+    processingstatus = [{'processed':"incomplete"}]
     global health
-    health="Unknown"
+    health="Good"
 
     policy_json_request=request.get_json()
-    print("Creating policy protobuf message")
 
     my_policy = Parse(json.dumps(policy_json_request),
       policy_pb2.Policy())
@@ -56,15 +52,30 @@ def policy_update():
 
     producer = SerializingProducer(producer_conf)
     try:
-      producer.produce(topic="policy-protobuf", key=str(uuid4()), value=my_policy)
+      producer.produce(topic="policy-protobuf", key=str(uuid4()), value=my_policy, on_delivery=delivery_report)
       producer.flush()
-      processingstatus=processedcomplete
     except:
       print ("Error: Producer")
       processingstatus=processedfailed
       health="endpoint policyupdate had a backend call error to topic"
-
     return(jsonify(processingstatus) )
+
+def delivery_report(err, msg):
+    global processingstatus
+    processedcomplete = [{'processed':"complete"}]
+    processedfailed = [{'processed':"fail"}]
+    global health
+
+    if err is not None:
+      print("Delivery failed for User record {}: {}".format(msg.key(), err))
+      processingstatus=processedfailed
+      health="endpoint policyupdate had a backend call error to topic"
+    else:
+      print('User record {} successfully produced to {} [{}] at offset {}'.format(
+        msg.key(), msg.topic(), msg.partition(), msg.offset()))
+      processingstatus=processedcomplete
+      health="Ok"
+
 
 def main():
     app.run(host='0.0.0.0', port=8080)

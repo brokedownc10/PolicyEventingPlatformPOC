@@ -114,3 +114,9 @@ https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/_
 
 
 ## curl -X POST -H "Content-Type: application/json" --data '{"policyNumber": 400, "policyPrice": 3500.75, "policyDetails": "Auto Policy with three cars"}' http://lmpolicycapture-knative.default.35.238.210.88.sslip.io/policyupdate
+
+##Kafka
+
+## kubectl exec -it connect-0 -n confluent -- /usr/bin/kafka-topics --zookeeper zookeeper:2181/kafka-confluent --topic   policy-protobuf --replication-factor 3 --partitions 4 --create
+
+## kubectl exec -it connect-0 -n confluent -- /usr/bin/kafka-topics --zookeeper zookeeper:2181/kafka-confluent --list | grep -v confluent

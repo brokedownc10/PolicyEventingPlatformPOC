@@ -22,7 +22,7 @@ spec:
         autoscaling.knative.dev/maxScale: "10"
     spec:
       containers:
-        - image: docker.io/cuhlbblew/lmpolicycapture-knative:1.16
+        - image: docker.io/cuhlbblew/lmpolicycapture-knative:1.19
           env:
           - name: TARGET
             value: "lmpolicycapture-knative"
